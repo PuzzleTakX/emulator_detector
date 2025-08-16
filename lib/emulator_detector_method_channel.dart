@@ -14,4 +14,18 @@ class MethodChannelEmulatorDetector extends EmulatorDetectorPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+  @override
+  Future<bool> get isEmulator async {
+    try {
+      final result = await methodChannel.invokeMethod<bool>('isEmulator');
+      return result!;
+    } catch (e) {
+      return true;
+    }
+  }
+  @override
+  Future<Map<String, dynamic>> get getEmulatorChecks async {
+    final checks = await methodChannel.invokeMethod<Map<String, dynamic>>('getEmulatorChecks');
+    return checks!;
+  }
 }

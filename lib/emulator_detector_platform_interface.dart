@@ -26,4 +26,10 @@ abstract class EmulatorDetectorPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+  Future<bool> get isEmulator async {
+    throw UnimplementedError('isEmulator() has not been implemented.');
+  }
+  Future<Map<String, dynamic>> get getEmulatorChecks async {
+    throw UnimplementedError('getEmulatorChecks() has not been implemented.');
+  }
 }

@@ -10,6 +10,13 @@ class MockEmulatorDetectorPlatform
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<bool> get isEmulator => Future.value(false);
+
+  @override
+  Future<Map<String, dynamic>> get getEmulatorChecks => Future.value({});
+
 }
 
 void main() {

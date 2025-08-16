@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.puzzletak.emu.emulator_detector_example"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "28.0.12433566"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

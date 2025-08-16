@@ -7,7 +7,6 @@ buildscript {
         google()
         mavenCentral()
     }
-
     dependencies {
         classpath("com.android.tools.build:gradle:8.7.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
@@ -26,8 +25,13 @@ apply plugin: "kotlin-android"
 
 android {
     namespace = "com.puzzletak.emu.emulator_detector"
+    ndkVersion = "28.0.12433566"
+    compileSdk = 34
+    buildToolsVersion = "34.0.0"
 
-    compileSdk = 35
+    defaultConfig {
+        minSdk = 21
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -35,32 +39,34 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = "11"
     }
 
     sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+            java.srcDirs += "src/main/kotlin"
+        }
         test.java.srcDirs += "src/test/kotlin"
-    }
-
-    defaultConfig {
-        minSdk = 21
-    }
-
-    dependencies {
-        testImplementation("org.jetbrains.kotlin:kotlin-test")
-        testImplementation("org.mockito:mockito-core:5.0.0")
     }
 
     testOptions {
         unitTests.all {
             useJUnitPlatform()
-
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen {false}
+                showStandardStreams = true
             }
         }
     }
+
+    buildFeatures {
+        viewBinding false
+    }
+}
+
+dependencies {
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.mockito:mockito-core:5.0.0")
 }
